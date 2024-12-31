@@ -1,2 +1,1 @@
-# expense-bash_scripts
-expense project bash-scriptings
+# expense project bash-scriptings
