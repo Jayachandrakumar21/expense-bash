@@ -40,13 +40,13 @@ then
     exit 1 #other then 0 will exit the script
 fi
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE_NAME
 validation $? "disabling nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
 validation $? "Enabling nodejs 20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE_NAME
 validation $? "Installing nodejs"
 
 useradd expense
@@ -61,18 +61,24 @@ unzip /tmp/backend.zip
 
 cd /app
 
-npm install
+npm install &>>$LOG_FILE_NAME
 validation $? "Installing Dependensis"
 
-vim /etc/systemd/system/backend.service
-systemctl daemon-reload
-validation $? ""
-systemctl start backend
-validation $? ""
-systemctl enable backend
-validation $? ""
-dnf install mysql -y
-validation $? ""
+cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
+
+systemctl daemon-reload &>>$LOG_FILE_NAME
+validation $? "daemon-reloading"
+
+systemctl start backend &>>$LOG_FILE_NAME
+validation $? "starting backend service"
+
+systemctl enable backend &>>$LOG_FILE_NAME
+validation $? "enabling backend service"
+
+dnf install mysql -y &>>$LOG_FILE_NAME
+validation $? "Installing mysql client"
+
 mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
-systemctl restart backend
-validation $? ""
+
+systemctl restart backend &>>$LOG_FILE_NAME
+validation $? "restarting backend service"
