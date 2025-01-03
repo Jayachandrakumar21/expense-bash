@@ -1,7 +1,7 @@
 #!/bin/bash
 #Created by : Jayachandra_kumar Date:03-01-2025
-#Topic: Bash-script to intall packages 
-#Sub-topic/Scenario: using exit status, functions, conditions and colors
+#Topic: configuring database server 
+#Sub-topic/Scenario: mysql-server
 
 
 
