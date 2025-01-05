@@ -51,34 +51,34 @@ validation $? "Installing nodejs"
 
 useradd expense
 
-mkdir -p /app
+# mkdir -p /app
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+# curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
 
-cd /app
+# cd /app
 
-unzip /tmp/backend.zip
+# unzip /tmp/backend.zip
 
-cd /app
+# cd /app
 
-npm install &>>$LOG_FILE_NAME
-validation $? "Installing Dependensis"
+# npm install &>>$LOG_FILE_NAME
+# validation $? "Installing Dependensis"
 
-cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
+# cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
 
-systemctl daemon-reload &>>$LOG_FILE_NAME
-validation $? "daemon-reloading"
+# systemctl daemon-reload &>>$LOG_FILE_NAME
+# validation $? "daemon-reloading"
 
-systemctl start backend &>>$LOG_FILE_NAME
-validation $? "starting backend service"
+# systemctl start backend &>>$LOG_FILE_NAME
+# validation $? "starting backend service"
 
-systemctl enable backend &>>$LOG_FILE_NAME
-validation $? "enabling backend service"
+# systemctl enable backend &>>$LOG_FILE_NAME
+# validation $? "enabling backend service"
 
-dnf install mysql -y &>>$LOG_FILE_NAME
-validation $? "Installing mysql client"
+# dnf install mysql -y &>>$LOG_FILE_NAME
+# validation $? "Installing mysql client"
 
-mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
+# mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
 
-systemctl restart backend &>>$LOG_FILE_NAME
-validation $? "restarting backend service"
+# systemctl restart backend &>>$LOG_FILE_NAME
+# validation $? "restarting backend service"
