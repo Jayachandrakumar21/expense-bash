@@ -76,20 +76,23 @@ npm install &>>$LOG_FILE_NAME
 validation $? "Installing Dependensis"
 
 cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
+validation $? "Copping backend.service file"
 
-# systemctl daemon-reload &>>$LOG_FILE_NAME
-# validation $? "daemon-reloading"
+systemctl daemon-reload &>>$LOG_FILE_NAME
+validation $? "daemon-reloading"
 
-# systemctl start backend &>>$LOG_FILE_NAME
-# validation $? "starting backend service"
+systemctl start backend &>>$LOG_FILE_NAME
+validation $? "starting backend service"
 
-# systemctl enable backend &>>$LOG_FILE_NAME
-# validation $? "enabling backend service"
+systemctl enable backend &>>$LOG_FILE_NAME
+validation $? "enabling backend service"
 
-# dnf install mysql -y &>>$LOG_FILE_NAME
-# validation $? "Installing mysql client"
+# Prepareing MYSQL schema
 
-# mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
+dnf install mysql -y &>>$LOG_FILE_NAME
+validation $? "Installing mysql client"
+
+mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
 
 # systemctl restart backend &>>$LOG_FILE_NAME
 # validation $? "restarting backend service"
