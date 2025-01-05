@@ -58,13 +58,17 @@ else
     echo -e "Expense User already Exists.. $R Skipping $N"
 fi
 
-mkdir -p /app
+mkdir -p /app &>>$LOG_FILE_NAME
+validation $? "Creating app Directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
+validation $? "Downloading expense-backend"
 
 cd /app
+rm -rf /app/*
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOG_FILE_NAME
+validation $? "unzipping backend app"
 
 # cd /app
 
