@@ -55,7 +55,7 @@ then
     useradd expense
     validation $? "Expense user adding"
 else
-    echo -e "Expense User already Exists.. $RSkipping$N"
+    echo -e "Expense User already Exists.. $R Skipping $N"
 fi
 
 # mkdir -p /app
