@@ -60,11 +60,11 @@ fi
 
 mkdir -p /app
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
 
-# cd /app
+cd /app
 
-# unzip /tmp/backend.zip
+unzip /tmp/backend.zip
 
 # cd /app
 
