@@ -72,7 +72,7 @@ validation $? "unzipping backend app"
 
 cd /app
 
-npm install &>>$LOG_FILE_NAME
+npm install #&>>$LOG_FILE_NAME
 
 # validation $? "Installing Dependensis"
 
