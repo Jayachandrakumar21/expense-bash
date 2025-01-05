@@ -49,7 +49,14 @@ validation $? "Enabling nodejs 20"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 validation $? "Installing nodejs"
 
-useradd expense
+id expense &>>$LOG_FILE_NAME
+if [ $? -ne 0 ]
+then
+    useradd expense
+    validation $? "Expense user adding"
+else
+    echo "Expense User already Exist.. $RSkipping$N"
+fi
 
 # mkdir -p /app
 
