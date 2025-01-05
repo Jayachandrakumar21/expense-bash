@@ -72,11 +72,10 @@ validation $? "unzipping backend app"
 
 cd /app
 
-npm install #&>>$LOG_FILE_NAME
+npm install &>>$LOG_FILE_NAME
+validation $? "Installing Dependensis"
 
-# validation $? "Installing Dependensis"
-
-# cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/expense-bash/backend.service /etc/systemd/system/backend.service
 
 # systemctl daemon-reload &>>$LOG_FILE_NAME
 # validation $? "daemon-reloading"
