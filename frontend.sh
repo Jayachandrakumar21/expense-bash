@@ -50,14 +50,19 @@ systemctl start nginx &>>$LOG_FILE_NAME
 validation $? "starting nginx server"
 
 rm -rf /usr/share/nginx/html/*
+validation $? "clearing html folder"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAME
+validation $? "Downloading frontend"
 
 cd /usr/share/nginx/html
-# rm -rf/tmp/frontend.zip
-unzip /tmp/frontend.zip &>>$LOG_FILE_NAME
+validation $? "Change directory"
 
-cp /home/ec2-user/expense-bash/expense.conf /etc/nginx/default.d/expense.conf
+unzip /tmp/frontend.zip &>>$LOG_FILE_NAME
+validation $? "unzipping frontend"
+
+cp /home/ec2-user/expense-bash/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE_NAME
+validation $? "Coping expense conf file"
 
 systemctl restart nginx &>>$LOG_FILE_NAME
 validation $? "restarting nginx server"
