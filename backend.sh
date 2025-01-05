@@ -92,7 +92,8 @@ validation $? "enabling backend service"
 dnf install mysql -y &>>$LOG_FILE_NAME
 validation $? "Installing mysql client"
 
-mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h mysql.simplifysuccess.life -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE_NAME
+validation $? "Setting-up transactions schema and tables"
 
-# systemctl restart backend &>>$LOG_FILE_NAME
-# validation $? "restarting backend service"
+systemctl restart backend &>>$LOG_FILE_NAME
+validation $? "restarting backend service"
